@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+  <title>NEXO — Aprende sin límites</title>
+
+  <style>
+    :root {
+      --bg: #080b16;
+      --panel: #11182b;
+      --cyan: #5cecff;
+      --violet: #a18aff;
+      --text: #f2f5ff;
+      --muted: #a4afc9;
+      --line: #283451;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        radial-gradient(ellipse at 15% 0%, #192752, transparent 42%),
+        radial-gradient(ellipse at 90% 25%, #291541, transparent 35%),
+        var(--bg);
+      font-family: system-ui, Arial, sans-serif;
+      min-height: 100vh;
+    }
+
+    .wrap {
+      width: min(1050px, 92%);
+      margin: auto;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 0;
+      border-bottom: 1px solid #ffffff15;
+    }
+
+    .logo {
+      font-size: 1.7rem;
+      font-weight: 900;
+      letter-spacing: 5px;
+      color: var(--cyan);
+    }
+
+    .tag {
+      color: var(--muted);
+      border: 1px solid var(--line);
+      border-radius: 30px;
+      padding: 8px 12px;
+      font-size: .75rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 0 45px;
+    }
+
+    .eyebrow {
+      color: var(--cyan);
+      letter-spacing: 3px;
+      font-size: .8rem;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      font-size: clamp(2.7rem, 8vw, 5rem);
+      line-height: 1.05;
+      margin: 18px 0;
+    }
+
+    h1 span {
+      color: var(--cyan);
+      text-shadow: 0 0 25px #5cecff35;
+    }
+
+    .subtitle {
+      max-width: 650px;
+      margin: 0 auto 25px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .search {
+      display: flex;
+      gap: 10px;
+      max-width: 750px;
+      margin: 25px auto 10px;
+    }
+
+    input {
+      flex: 1;
+      min-width: 0;
+      padding: 15px;
+      color: white;
+      background: #0b1020;
+      border: 1px solid #344160;
+      border-radius: 12px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    input:focus { border-color: var(--cyan); }
+
+    button {
+      border: none;
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-weight: 800;
+      cursor: pointer;
+      color: #071019;
+      background: linear-gradient(100deg, var(--cyan), var(--violet));
+    }
+
+    button:disabled {
+      opacity: .6;
+      cursor: wait;
+    }
+
+    .hint, .muted {
+      color: var(--muted);
+      font-size: .85rem;
+    }
+
+    .chips {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .chip {
+      color: #dce5ff;
+      background: #121a30;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      padding: 9px 13px;
+      font-size: .82rem;
+    }
+
+    section { padding: 25px 0 35px; }
+
+    h2 { font-size: 1.4rem; }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 15px;
+    }
+
+    .card, .nova-box, .result {
+      background: linear-gradient(145deg, #151e35, #0d1324);
+      border: 1px solid var(--line);
+      border-radius: 17px;
+      padding: 20px;
+      overflow-wrap: anywhere;
+    }
+
+    .icon {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+    }
+
+    .card h3 { margin: 0 0 10px; }
+
+    .card p, .nova-box p {
+      color: var(--muted);
+      font-size: .92rem;
+      line-height: 1.65;
+    }
+
+    .nova-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .nova-box {
+      border-color: #6254a0;
+      background: linear-gradient(145deg, #201d43, #111326);
+    }
+
+    .nova-name {
+      font-size: 2rem;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    .nova-name span { color: var(--cyan); }
+
+    .results {
+      display: grid;
+      gap: 12px;
+    }
+
+    .result h3 {
+      font-size: 1rem;
+      line-height: 1.5;
+      margin-top: 0;
+    }
+
+    .result p {
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.6;
+    }
+
+    .result a, a { color: var(--cyan); }
+
+    .meta {
+      color: #c5cde2;
+      font-size: .8rem;
+    }
+
+    .status {
+      color: var(--muted);
+      padding: 12px 0;
+      line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid #ffffff15;
+      padding: 25px 0 35px;
+      color: var(--muted);
+      font-size: .82rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 700px) {
+      .cards, .nova-layout { grid-template-columns: 1fr; }
+      .hero { padding-top: 45px; }
+      .search { flex-direction: column; }
+      .search button { width: 100%; }
+      .tag { font-size: .65rem; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="wrap">
+    <div class="logo">NEXO.</div>
+    <div class="tag">PLATAFORMA EDUCATIVA</div>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <div class="eyebrow">Conocimiento conectado</div>
+
+      <h1>
+        Explora más.<br>
+        <span>Comprende mejor.</span>
+      </h1>
+
+      <p class="subtitle">
+        Aprende sobre cualquier tema, explora investigaciones
+        académicas y conecta nuevas ideas en un solo lugar.
+      </p>
+
+      <form class="search" id="searchForm">
+        <input
+          id="searchInput"
+          type="search"
+          placeholder="Busca un tema, por ejemplo: placas tectónicas..."
+          aria-label="Buscar investigaciones"
+          required
+        >
+        <button id="searchButton" type="submit">
+          Buscar ↗
+        </button>
+      </form>
+
+      <div class="hint">
+        Buscador académico de OpenAlex · Requiere internet
+      </div>
+
+      <div class="chips">
+        <button class="chip" type="button" data-query="inteligencia artificial">
+          Inteligencia artificial
+        </button>
+        <button class="chip" type="button" data-query="cambio climático">
+          Cambio climático
+        </button>
+        <button class="chip" type="button" data-query="placas tectónicas Panamá">
+          Placas tectónicas
+        </button>
+        <button class="chip" type="button" data-query="agricultura sostenible">
+          Agricultura sostenible
+        </button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Tu espacio de aprendizaje</h2>
+      <p class="muted">El conocimiento empieza con una pregunta.</p>
+
+      <div class="cards">
+        <article class="card">
+          <div class="icon">🔎</div>
+          <h3>Investiga</h3>
+          <p>
+            Encuentra publicaciones académicas y abre sus enlaces
+            para consultar más información.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🧠</div>
+          <h3>Comprende</h3>
+          <p>
+            Aprende conceptos complejos paso a paso y desarrolla
+            tus conocimientos.
+          </p>
+        </article>
+
+        <article class="card">
+          <div class="icon">🌐</div>
+          <h3>Explora</h3>
+          <p>
+            Descubre ciencias, tecnología, historia, agricultura,
+            naturaleza y muchas otras áreas.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="nova-layout">
+      <div class="nova-box">
+        <div class="nova-name">NOVA <span>/ AI</span></div>
+        <h3>Tu futuro asistente inteligente</h3>
+        <p>
+          NOVA forma parte de NEXO para ayudarte a aprender,
+          investigar y comprender nuevos temas.
+        </p>
+        <p>
+          Estamos construyendo sus funciones por etapas.
+          Esta primera versión todavía no tiene conectada
+          una IA conversacional.
+        </p>
+      </div>
+
+      <article class="card">
+        <div class="icon">📚</div>
+        <h3>Fuentes académicas</h3>
+        <p>
+          Consulta registros de investigaciones a través de
+          OpenAlex. Recuerda revisar la publicación original,
+          su metodología y sus referencias antes de usarla
+          como evidencia.
+        </p>
+        <p>
+          <a href="https://openalex.org/"
+             target="_blank"
+             rel="noopener noreferrer">
+            Visitar OpenAlex ↗
+          </a>
+        </p>
+      </article>
+    </section>
+
+    <section id="searchResults">
+      <h2>Resultados de investigación</h2>
+      <p class="muted">Las publicaciones que busques aparecerán aquí.</p>
+      <div id="results" class="results" aria-live="polite">
+        <div class="status">
+          Escribe un tema arriba para comenzar tu búsqueda.
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>NEXO</strong> · Proyecto educativo en desarrollo.<br>
+      Los resultados provienen del catálogo de OpenAlex.
+      Que una publicación aparezca en el catálogo no garantiza
+      que haya pasado por revisión por pares ni que todas sus
+      afirmaciones sean correctas.
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("searchForm");
+    const input = document.getElementById("searchInput");
+    const results = document.getElementById("results");
+    const searchButton = document.getElementById("searchButton");
+
+    function element(tag, className, content) {
+      const el = document.createElement(tag);
+      if (className) el.className = className;
+      if (content !== undefined) el.textContent = content;
+      return el;
+    }
+
+    document.querySelectorAll("[data-query]").forEach(button => {
+      button.addEventListener("click", () => {
+        input.value = button.dataset.query;
+        form.requestSubmit();
+      });
+    });
+
+    form.addEventListener("submit", async event => {
+      event.preventDefault();
+
+      const query = input.value.trim();
+      if (!query) return;
+
+      searchButton.disabled = true;
+      searchButton.textContent = "Buscando...";
+      results.replaceChildren(
+        element("div", "status", "Consultando publicaciones académicas...")
+      );
+
+      try {
+        const url =
+          "https://api.openalex.org/works?search=" +
+          encodeURIComponent(query) +
+          "&per-page=8&sort=relevance_score:desc";
+
+        const response = await fetch(url);
+
+        if (!response.ok) {
+          throw new Error("No se pudo consultar el catálogo.");
+        }
+
+        const data = await response.json();
+        results.replaceChildren();
+
+        if (!data.results || data.results.length === 0) {
+          results.append(
+            element("div", "status", "No encontramos resultados. Prueba otras palabras.")
+          );
+          return;
+        }
+
+        data.results.forEach(work => {
+          const card = element("article", "result");
+          const title = element(
+            "h3",
+            "",
+            work.title || "Título no disponible"
+          );
+
+          const authors = (work.authorships || [])
+            .slice(0, 3)
+            .map(item => item.author && item.author.display_name)
+            .filter(Boolean)
+            .join(", ");
+
+          const journal =
+            work.primary_location &&
+            work.primary_location.source &&
+            work.primary_location.source.display_name;
+
+          const details = [work.publication_year, journal]
+            .filter(Boolean)
+            .join(" · ");
+
+          card.append(
+            title,
+            element("div", "meta", details || "Datos bibliográficos limitados"),
+            element(
+              "p",
+              "",
+              "Autores: " + (authors || "No indicados en el registro") +
+              ((work.authorships || []).length > 3 ? " y otros." : ".")
+            )
+          );
+
+          const linkUrl =
+            work.doi ||
+            (work.primary_location && work.primary_location.landing_page_url) ||
+            work.id;
+
+          if (linkUrl) {
+            const link = element("a", "", "Consultar publicación ↗");
+            link.href = linkUrl;
+            link.target = "_blank";
+            link.rel = "noopener noreferrer";
+            card.append(link);
+          }
+
+          results.append(card);
+        });
+
+      } catch (error) {
+        results.replaceChildren(
+          element(
+            "div",
+            "status",
+            "No se pudo conectar con OpenAlex. Revisa tu conexión e inténtalo de nuevo."
+          )
+        );
+
+        const link = element("a", "", "Abrir OpenAlex ↗");
+        link.href = "https://openalex.org/";
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        results.append(link);
+
+      } finally {
+        searchButton.disabled = false;
+        searchButton.textContent = "Buscar ↗";
+      }
+    });
+  </script>
+</body>
+  </html>
+    
